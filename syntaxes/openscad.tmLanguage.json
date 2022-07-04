@@ -1,5 +1,23 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"scopeName": "source.openscad",
-	"patterns": []
+	"patterns": [
+		{ "include": "#comments" }
+	],
+	"repository": {
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.double-slash",
+					"begin": "//",
+					"end": "\n"
+				},
+				{
+					"name": "comment.block",
+					"begin": "/\\*",
+					"end": "\\*/"
+				}
+			]
+		}
+	}
 }
