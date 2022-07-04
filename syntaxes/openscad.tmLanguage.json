@@ -8,14 +8,67 @@
 		"comments": {
 			"patterns": [
 				{
-					"name": "comment.line.double-slash",
-					"begin": "//",
-					"end": "\n"
+					"name": "comment.line.openscad",
+					"match": "(//)(.*)$",
+					"captures": {
+						"1": {
+							"name": "punctuation.comment.line"
+						},
+						"2": {
+							"patterns": [
+								{ "include": "#customizer-parameters" }
+							]
+						}
+					}
 				},
 				{
-					"name": "comment.block",
-					"begin": "/\\*",
-					"end": "\\*/"
+					"name": "comment.block.openscad",
+					"match": "(/\\*)(.*)(\\*/)",
+					"captures": {
+						"1": {
+							"name": "punctuation.comment.block.open"
+						},
+						"2": {
+							"patterns": [
+								{ "include": "#customizer-tabs" }
+							]
+						},
+						"3": {
+							"name": "punctuation.comment.block.close"
+						}
+					}
+				}
+			]
+		},
+		"customizer-tabs": {
+			"patterns": [
+				{
+					"name": "keyword.other.customizer.tab.openscad",
+					"match": "(\\[)(?:.+)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.bracket.open"
+						},
+						"2": {
+							"name": "punctuation.bracket.close"
+						}
+					}
+				}
+			]
+		},
+		"customizer-parameters": {
+			"patterns": [
+				{
+					"name": "keyword.other.customizer.parameter.openscad",
+					"match": "(\\[)(?:.+)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.bracket.open"
+						},
+						"2": {
+							"name": "punctuation.bracket.close"
+						}
+					}
 				}
 			]
 		}
