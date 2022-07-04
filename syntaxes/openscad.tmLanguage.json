@@ -13,6 +13,7 @@
 		},
 		"values": {
 			"patterns": [
+				{ "include": "#booleans" },
 				{ "include": "#numbers-float" },
 				{ "include": "#numbers-integer" },
 				{ "include": "#strings-quoted" }
@@ -80,6 +81,7 @@
 						},
 						"2": {
 							"patterns": [
+								{ "include": "#booleans" },
 								{ "include": "#numbers-float" },
 								{ "include": "#numbers-integer" },
 								{ "include": "#strings-unquoted" }
@@ -89,6 +91,18 @@
 							"name": "punctuation.bracket.close"
 						}
 					}
+				}
+			]
+		},
+		"booleans": {
+			"patterns": [
+				{
+					"name": "constant.language.boolean.true.openscad",
+					"match": "\\btrue\\b"
+				},
+				{
+					"name": "constant.language.boolean.false.openscad",
+					"match": "\\bfalse\\b"
 				}
 			]
 		},
