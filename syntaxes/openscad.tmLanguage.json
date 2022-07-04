@@ -48,13 +48,13 @@
 				{ "include": "#comments" },
 				{ "include": "#punctuation" },
 				{ "include": "#operators" },
+				{ "include": "#builtin" },
 				{ "include": "#values" },
 				{ "include": "#functions" }
 			]
 		},
 		"values": {
 			"patterns": [
-				{ "include": "#values-builtin" },
 				{ "include": "#values-booleans" },
 				{ "include": "#values-numbers-float" },
 				{ "include": "#values-numbers-integer" },
@@ -106,8 +106,24 @@
 					"match": "\\.(?![0-9])"
 				},
 				{
-				  "name": "keyword.operator.other.scad",
+				  "name": "keyword.operator.other.openscad",
 				  "match": "#|%|!"
+				}
+			]
+		},
+		"builtin": {
+			"patterns": [
+				{
+					"name": "variable.language.openscad",
+					"match": "\\$(children|f[ans]|parent_modules|preview|t|vp[drt])\\b"
+				},
+				{
+					"name": "constant.language.undefined.openscad",
+					"match": "\\b(?:undef)\\b"
+				},
+				{
+					"name": "constant.language.pi.openscad",
+					"match": "\\b(?:PI)\\b"
 				}
 			]
 		},
@@ -120,18 +136,6 @@
 				{
 					"name": "constant.language.boolean.false.openscad",
 					"match": "\\b(?:false)\\b"
-				}
-			]
-		},
-		"values-builtin": {
-			"patterns": [
-				{
-					"name": "constant.language.undefined.openscad",
-					"match": "\\b(?:undef)\\b"
-				},
-				{
-					"name": "constant.language.pi.openscad",
-					"match": "\\b(?:PI)\\b"
 				}
 			]
 		},
