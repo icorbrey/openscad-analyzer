@@ -45,10 +45,11 @@
 		},
 		"scope": {
 			"patterns": [
+				{ "include": "#comments" },
 				{ "include": "#punctuation" },
+				{ "include": "#operators" },
 				{ "include": "#values" },
-				{ "include": "#functions" },
-				{ "include": "#comments" }
+				{ "include": "#functions" }
 			]
 		},
 		"values": {
@@ -75,10 +76,38 @@
 				{
 					"name": "meta.delimiter.object.comma.openscad",
 					"match": "(,)(\\s|\\t)*"
+				}
+			]
+		},
+		"operators": {
+			"patterns": [
+				{
+					"name": "keyword.operator.assignment.openscad",
+					"match": "=(?!=)"
 				},
 				{
-					"name": "meta.delimiter.object.dot.openscad",
+					"name": "keyword.operator.arithmetic.openscad",
+					"match": "[\\+\\-\\/\\*%]"
+				},
+				{
+					"name": "keyword.operator.comparison.openscad",
+					"match": "([><]|[=<!>]=)"
+				},
+				{
+					"name": "keyword.operator.logical.openscad",
+					"match": "(!|&&|\\|\\|)"
+				},
+				{
+					"name": "keyword.operator.ternary.openscad",
+					"match": "[\\?\\:]"
+				},
+				{
+					"name": "keyword.operator.member.openscad",
 					"match": "\\.(?![0-9])"
+				},
+				{
+				  "name": "keyword.operator.other.scad",
+				  "match": "#|%|!"
 				}
 			]
 		},
