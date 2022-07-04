@@ -8,15 +8,103 @@
 		"scope": {
 			"patterns": [
 				{ "include": "#values" },
+				{ "include": "#functions" },
 				{ "include": "#comments" }
 			]
 		},
 		"values": {
 			"patterns": [
-				{ "include": "#booleans" },
-				{ "include": "#numbers-float" },
-				{ "include": "#numbers-integer" },
-				{ "include": "#strings-quoted" }
+				{ "include": "#values-booleans" },
+				{ "include": "#values-numbers-float" },
+				{ "include": "#values-numbers-integer" },
+				{ "include": "#values-strings-quoted" }
+			]
+		},
+		"functions": {
+			"patterns": [
+				{ "include": "#functions-math" },
+				{ "include": "#functions-types" }
+			]
+		},
+		"values-booleans": {
+			"patterns": [
+				{
+					"name": "constant.language.boolean.true.openscad",
+					"match": "\\btrue\\b"
+				},
+				{
+					"name": "constant.language.boolean.false.openscad",
+					"match": "\\bfalse\\b"
+				}
+			]
+		},
+		"values-numbers-integer": {
+			"patterns": [
+				{
+					"name": "constant.numeric.integer.decimal.openscad",
+					"match": "\\b([1-9]+[0-9]*|0)"
+				}
+			]
+		},
+		"values-numbers-float": {
+			"patterns": [
+				{
+					"name": "constant.numeric.float.openscad",
+					"match": "\\b(?i:(\\d+\\.\\d*(e[\\-\\+]?\\d+)?))"
+				}
+			]
+		},
+		"values-strings-quoted": {
+			"patterns": [
+				{
+					"name": "string.double.quoted.openscad",
+					"begin": "(\")",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.string.begin.openscad"
+						}
+					},
+					"end": "(\")",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.definition.string.end.openscad"
+						}
+					},
+					"patterns": [
+						{
+							"name": "constant.character.escape.openscad",
+							"match": "\\\\(x[0-7]?[0-9A-Fa-f]|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{6}|.)"
+						}
+					]
+				}
+			]
+		},
+		"values-strings-unquoted": {
+			"patterns": [
+				{
+					"name": "string.unquoted.openscad",
+					"match": "[A-Za-z0-9]+"
+				}
+			]
+		},
+		"functions-math": {
+			"patterns": [
+				{
+					"name": "support.function.math.openscad",
+					"match": "\\b(abs|ceil|cross|exp|floor|ln|len|log|min|max|norm|pow|round|rands|sign|sqrt)\\b"
+				},
+				{
+					"name": "support.function.math.trig.openscad",
+					"match": "\\b(a?(sin|cos|tan)|atan2)\\b"
+				}
+			]
+		},
+		"functions-types": {
+			"patterns": [
+				{
+					"name": "support.function.type-test.openscad",
+					"match": "\\b(is_(undef|bool|num|string|list))\\b"
+				}
 			]
 		},
 		"comments": {
@@ -81,77 +169,16 @@
 						},
 						"2": {
 							"patterns": [
-								{ "include": "#booleans" },
-								{ "include": "#numbers-float" },
-								{ "include": "#numbers-integer" },
-								{ "include": "#strings-unquoted" }
+								{ "include": "#values-booleans" },
+								{ "include": "#values-numbers-float" },
+								{ "include": "#values-numbers-integer" },
+								{ "include": "#values-strings-unquoted" }
 							]
 						},
 						"3": {
 							"name": "punctuation.bracket.close"
 						}
 					}
-				}
-			]
-		},
-		"booleans": {
-			"patterns": [
-				{
-					"name": "constant.language.boolean.true.openscad",
-					"match": "\\btrue\\b"
-				},
-				{
-					"name": "constant.language.boolean.false.openscad",
-					"match": "\\bfalse\\b"
-				}
-			]
-		},
-		"numbers-integer": {
-			"patterns": [
-				{
-					"name": "constant.numeric.integer.decimal.openscad",
-					"match": "\\b([1-9]+[0-9]*|0)"
-				}
-			]
-		},
-		"numbers-float": {
-			"patterns": [
-				{
-					"name": "constant.numeric.float.openscad",
-					"match": "\\b(?i:(\\d+\\.\\d*(e[\\-\\+]?\\d+)?))"
-				}
-			]
-		},
-		"strings-quoted": {
-			"patterns": [
-				{
-					"name": "string.double.quoted.openscad",
-					"begin": "(\")",
-					"beginCaptures": {
-						"1": {
-							"name": "punctuation.definition.string.begin.openscad"
-						}
-					},
-					"end": "(\")",
-					"endCaptures": {
-						"1": {
-							"name": "punctuation.definition.string.end.openscad"
-						}
-					},
-					"patterns": [
-						{
-							"name": "constant.character.escape.openscad",
-							"match": "\\\\(x[0-7]?[0-9A-Fa-f]|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{6}|.)"
-						}
-					]
-				}
-			]
-		},
-		"strings-unquoted": {
-			"patterns": [
-				{
-					"name": "string.unquoted.openscad",
-					"match": "[A-Za-z0-9]+"
 				}
 			]
 		}
