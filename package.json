@@ -28,6 +28,13 @@
 				"aliases": ["OpenSCAD", "openscad"],
 				"configuration": "./syntaxes/openscad.language-configuration.json"
 			}
+		],
+		"grammars": [
+			{
+				"language": "openscad",
+				"scopeName": "source.openscad",
+				"path": "./syntaxes/openscad.tmLanguage.json"
+			}
 		]
 	}
 }
