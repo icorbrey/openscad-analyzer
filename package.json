@@ -15,5 +15,8 @@
 	},
 	"bugs": {
 		"url": "https://github.com/icorbrey/openscad-analyzer/issues"
+	},
+	"engines": {
+		"vscode": "^1.22.0"
 	}
 }
