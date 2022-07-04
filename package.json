@@ -1,0 +1,19 @@
+{
+	"displayName": "OpenSCAD Analyzer",
+	"name": "openscad-analyzer",
+	"description": "An OpenSCAD frontend for IDEs.",
+	"license": "Apache-2.0",
+	"author": {
+		"name": "Isaac Corbrey",
+		"email": "icorbrey@gmail.com",
+		"url": "https://github.com/icorbrey"
+	},
+	"homepage": "https://github.com/icorbrey/openscad-analyzer#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/icorbrey/openscad-analyzer.git"
+	},
+	"bugs": {
+		"url": "https://github.com/icorbrey/openscad-analyzer/issues"
+	}
+}
