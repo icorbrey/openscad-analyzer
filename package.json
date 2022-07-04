@@ -25,7 +25,8 @@
 			{
 				"id": "openscad",
 				"extensions": [".scad"],
-				"aliases": ["OpenSCAD", "openscad"]
+				"aliases": ["OpenSCAD", "openscad"],
+				"configuration": "./syntaxes/openscad.language-configuration.json"
 			}
 		]
 	}
