@@ -1,0 +1,397 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"scopeName": "source.openscad",
+	"fileTypes": ["openscad"],
+	"foldingStartMarker": "/\\*\\*|\\{\\s*$",
+	"foldingStopMarker": "\\*\\*/|^\\s*\\}",
+	"patterns": [
+		{ "include": "#imports" },
+		{ "include": "#scope" }
+	],
+	"repository": {
+		"imports": {
+			"patterns": [
+				{
+					"name": "keyword.control.include.openscad",
+					"match": "\\b(?:include)\\s*((<)[^>]*(>?))",
+					"captures": {
+						"1": {
+							"name": "string.quoted.other.lt-gt.openscad"
+						},
+						"2": {
+							"name": "punctuation.definition.string.begin.openscad"
+						},
+						"3": {
+							"name": "punctuation.definition.string.end.openscad"
+						}
+					}
+				},
+				{
+					"name": "keyword.control.use.openscad",
+					"match": "\\b(?:use)\\s*((<)[^>]*(>?))",
+					"captures": {
+						"1": {
+							"name": "string.quoted.other.lt-gt.openscad"
+						},
+						"2": {
+							"name": "punctuation.definition.string.begin.openscad"
+						},
+						"3": {
+							"name": "punctuation.definition.string.end.openscad"
+						}
+					}
+				}
+			]
+		},
+		"scope": {
+			"patterns": [
+				{ "include": "#comments" },
+				{ "include": "#punctuation" },
+				{ "include": "#operators" },
+				{ "include": "#builtin" },
+				{ "include": "#values" },
+				{ "include": "#functions" },
+				{ "include": "#userdef" }
+			]
+		},
+		"values": {
+			"patterns": [
+				{ "include": "#values-booleans" },
+				{ "include": "#values-numbers-float" },
+				{ "include": "#values-numbers-integer" },
+				{ "include": "#values-strings-quoted" }
+			]
+		},
+		"functions": {
+			"patterns": [
+				{ "include": "#functions-math" },
+				{ "include": "#functions-types" }
+			]
+		},
+		"userdef": {
+			"patterns": [
+				{ "include": "#userdef-functions" },
+				{ "include": "#userdef-modules" },
+				{ "include": "#userdef-variables" }
+			]
+		},
+		"punctuation": {
+			"patterns": [
+				{
+					"name": "punctuation.terminator.statement.openscad",
+					"match": "(\\;)"
+				},
+				{
+					"name": "meta.delimiter.object.comma.openscad",
+					"match": "(,)(\\s|\\t)*"
+				}
+			]
+		},
+		"operators": {
+			"patterns": [
+				{
+					"name": "keyword.operator.assignment.openscad",
+					"match": "=(?!=)"
+				},
+				{
+					"name": "keyword.operator.arithmetic.openscad",
+					"match": "[\\+\\-\\/\\*%]"
+				},
+				{
+					"name": "keyword.operator.comparison.openscad",
+					"match": "([><]|[=<!>]=)"
+				},
+				{
+					"name": "keyword.operator.logical.openscad",
+					"match": "(!|&&|\\|\\|)"
+				},
+				{
+					"name": "keyword.operator.ternary.openscad",
+					"match": "[\\?\\:]"
+				},
+				{
+					"name": "keyword.operator.member.openscad",
+					"match": "\\.(?![0-9])"
+				},
+				{
+				  "name": "keyword.operator.other.openscad",
+				  "match": "#|%|!"
+				}
+			]
+		},
+		"builtin": {
+			"patterns": [
+				{
+					"name": "variable.language.openscad",
+					"match": "\\$(children|f[ans]|parent_modules|preview|t|vp[drt])\\b"
+				},
+				{
+					"name": "constant.language.undefined.openscad",
+					"match": "\\b(?:undef)\\b"
+				},
+				{
+					"name": "constant.language.pi.openscad",
+					"match": "\\b(?:PI)\\b"
+				}
+			]
+		},
+		"values-booleans": {
+			"patterns": [
+				{
+					"name": "constant.language.boolean.true.openscad",
+					"match": "\\b(?:true)\\b"
+				},
+				{
+					"name": "constant.language.boolean.false.openscad",
+					"match": "\\b(?:false)\\b"
+				}
+			]
+		},
+		"values-numbers-integer": {
+			"patterns": [
+				{
+					"name": "constant.numeric.integer.decimal.openscad",
+					"match": "\\b([1-9]+[0-9]*|0)"
+				}
+			]
+		},
+		"values-numbers-float": {
+			"patterns": [
+				{
+					"name": "constant.numeric.float.openscad",
+					"match": "\\b(?i:(\\d+\\.\\d*(e[\\-\\+]?\\d+)?))"
+				}
+			]
+		},
+		"values-strings-quoted": {
+			"patterns": [
+				{
+					"name": "string.double.quoted.openscad",
+					"begin": "(\")",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.string.begin.openscad"
+						}
+					},
+					"end": "(\")",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.definition.string.end.openscad"
+						}
+					},
+					"patterns": [
+						{
+							"name": "constant.character.escape.openscad",
+							"match": "\\\\(x[0-7]?[0-9A-Fa-f]|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{6}|.)"
+						}
+					]
+				},
+				{
+					"name": "invalid.string.single.quoted.openscad",
+					"begin": "(')",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.string.begin.openscad"
+						}
+					},
+					"end": "(')",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.definition.string.end.openscad"
+						}
+					},
+					"patterns": [
+						{
+							"name": "constant.character.escape.openscad",
+							"match": "\\\\(x[0-7]?[0-9A-Fa-f]|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{6}|.)"
+						}
+					]
+				}
+			]
+		},
+		"values-strings-unquoted": {
+			"patterns": [
+				{
+					"name": "string.unquoted.openscad",
+					"match": "[A-Za-z0-9]+"
+				}
+			]
+		},
+		"functions-math": {
+			"patterns": [
+				{
+					"name": "support.function.math.openscad",
+					"match": "\\b(abs|ceil|cross|exp|floor|ln|len|log|min|max|norm|pow|round|rands|sign|sqrt)\\b"
+				},
+				{
+					"name": "support.function.math.trig.openscad",
+					"match": "\\b(a?(sin|cos|tan)|atan2)\\b"
+				}
+			]
+		},
+		"functions-types": {
+			"patterns": [
+				{
+					"name": "support.function.type-test.openscad",
+					"match": "\\b(is_(undef|bool|num|string|list))\\b"
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.openscad",
+					"match": "(//)(.*)$",
+					"captures": {
+						"1": {
+							"name": "punctuation.comment.line"
+						},
+						"2": {
+							"patterns": [
+								{ "include": "#customizer-parameters" }
+							]
+						}
+					}
+				},
+				{
+					"name": "comment.block.openscad",
+					"match": "(/\\*)(.*)(\\*/)",
+					"captures": {
+						"1": {
+							"name": "punctuation.comment.block.open"
+						},
+						"2": {
+							"patterns": [
+								{ "include": "#customizer-tabs" }
+							]
+						},
+						"3": {
+							"name": "punctuation.comment.block.close"
+						}
+					}
+				}
+			]
+		},
+		"customizer-tabs": {
+			"patterns": [
+				{
+					"name": "keyword.other.customizer.tab.openscad",
+					"match": "(\\[)(?:.+)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.bracket.open"
+						},
+						"2": {
+							"name": "punctuation.bracket.close"
+						}
+					}
+				}
+			]
+		},
+		"customizer-parameters": {
+			"patterns": [
+				{
+					"name": "keyword.other.customizer.parameter.openscad",
+					"match": "(\\[)(.*)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.bracket.open"
+						},
+						"2": {
+							"patterns": [
+								{ "include": "#values-booleans" },
+								{ "include": "#values-numbers-float" },
+								{ "include": "#values-numbers-integer" },
+								{ "include": "#values-strings-unquoted" }
+							]
+						},
+						"3": {
+							"name": "punctuation.bracket.close"
+						}
+					}
+				}
+			]
+		},
+		"userdef-functions": {
+			"patterns": [
+				{
+					"name": "meta.type.function.openscad",
+					"begin": "\\b(function)\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*(\\()",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.type.function.openscad"
+						},
+						"2": {
+							"name": "entity.name.function"
+						},
+						"3": {
+							"name": "punctuation.paren.open"
+						}
+					},
+					"patterns": [
+						{ "include": "#invalid-identifiers" }
+					],
+					"end": "(\\))",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.paren.close"
+						}
+					}
+				}
+			]
+		},
+		"userdef-modules": {
+			"patterns": [
+				{
+					"name": "meta.type.module.openscad",
+					"begin": "\\b(module)\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*(\\()",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.type.module.openscad"
+						},
+						"2": {
+							"name": "entity.name.module"
+						},
+						"3": {
+							"name": "punctuation.paren.open"
+						}
+					},
+					"patterns": [
+						{ "include": "#invalid-identifiers" },
+						{ "include": "#userdef-variables-parameters" }
+					],
+					"end": "(\\))",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.paren.close"
+						}
+					}
+				}
+			]
+		},
+		"userdef-variables": {
+			"patterns": [
+				{
+					"name": "variable.other.openscad",
+					"match": "[A-Za-z_][A-Za-z0-9_]*"
+				}
+			]
+		},
+		"userdef-variables-parameters": {
+			"patterns": [
+				{
+					"name": "variable.parameter.openscad",
+					"match": "[A-Za-z_][A-Za-z0-9_]*"
+				}
+			]
+		},
+		"invalid-identifiers": {
+			"patterns": [
+				{
+					"name": "invalid.identifier.openscad",
+					"match": "\\b(?i:true|false|module|function|include|use|undef|(intersection_)?for|if|else|let)\\b"
+				}
+			]
+		}
+	}
+}

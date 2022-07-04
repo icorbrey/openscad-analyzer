@@ -3,6 +3,7 @@
 	"name": "openscad-analyzer",
 	"description": "An OpenSCAD frontend for IDEs.",
 	"license": "Apache-2.0",
+	"version": "0.1.0",
 	"author": {
 		"name": "Isaac Corbrey",
 		"email": "icorbrey@gmail.com",
@@ -18,5 +19,22 @@
 	},
 	"engines": {
 		"vscode": "^1.22.0"
+	},
+	"contributes": {
+		"languages": [
+			{
+				"id": "openscad",
+				"extensions": [".scad"],
+				"aliases": ["OpenSCAD", "openscad"],
+				"configuration": "./syntaxes/openscad.language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "openscad",
+				"scopeName": "source.openscad",
+				"path": "./syntaxes/openscad.tmLanguage.json"
+			}
+		]
 	}
 }
