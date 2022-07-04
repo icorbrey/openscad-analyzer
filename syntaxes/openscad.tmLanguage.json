@@ -1,6 +1,9 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"scopeName": "source.openscad",
+	"fileTypes": ["openscad"],
+	"foldingStartMarker": "/\\*\\*|\\{\\s*$",
+	"foldingStopMarker": "\\*\\*/|^\\s*\\}",
 	"patterns": [
 		{ "include": "#imports" },
 		{ "include": "#scope" }
@@ -10,7 +13,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.include.openscad",
-					"match": "\\binclude\\s*((<)[^>]*(>?))",
+					"match": "\\b(?:include)\\s*((<)[^>]*(>?))",
 					"captures": {
 						"1": {
 							"name": "string.quoted.other.lt-gt.openscad"
@@ -25,7 +28,7 @@
 				},
 				{
 					"name": "keyword.control.use.openscad",
-					"match": "\\buse\\s*((<)[^>]*(>?))",
+					"match": "\\b(?:use)\\s*((<)[^>]*(>?))",
 					"captures": {
 						"1": {
 							"name": "string.quoted.other.lt-gt.openscad"
@@ -42,6 +45,7 @@
 		},
 		"scope": {
 			"patterns": [
+				{ "include": "#punctuation" },
 				{ "include": "#values" },
 				{ "include": "#functions" },
 				{ "include": "#comments" }
@@ -62,15 +66,31 @@
 				{ "include": "#functions-types" }
 			]
 		},
+		"punctuation": {
+			"patterns": [
+				{
+					"name": "punctuation.terminator.statement.openscad",
+					"match": "(\\;)"
+				},
+				{
+					"name": "meta.delimiter.object.comma.openscad",
+					"match": "(,)(\\s|\\t)*"
+				},
+				{
+					"name": "meta.delimiter.object.dot.openscad",
+					"match": "\\.(?![0-9])"
+				}
+			]
+		},
 		"values-booleans": {
 			"patterns": [
 				{
 					"name": "constant.language.boolean.true.openscad",
-					"match": "\\btrue\\b"
+					"match": "\\b(?:true)\\b"
 				},
 				{
 					"name": "constant.language.boolean.false.openscad",
-					"match": "\\bfalse\\b"
+					"match": "\\b(?:false)\\b"
 				}
 			]
 		},
@@ -78,11 +98,11 @@
 			"patterns": [
 				{
 					"name": "constant.language.undefined.openscad",
-					"match": "\\bundef\\b"
+					"match": "\\b(?:undef)\\b"
 				},
 				{
 					"name": "constant.language.pi.openscad",
-					"match": "\\bPI\\b"
+					"match": "\\b(?:PI)\\b"
 				}
 			]
 		},
@@ -113,6 +133,27 @@
 						}
 					},
 					"end": "(\")",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.definition.string.end.openscad"
+						}
+					},
+					"patterns": [
+						{
+							"name": "constant.character.escape.openscad",
+							"match": "\\\\(x[0-7]?[0-9A-Fa-f]|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{6}|.)"
+						}
+					]
+				},
+				{
+					"name": "invalid.string.single.quoted.openscad",
+					"begin": "(')",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.string.begin.openscad"
+						}
+					},
+					"end": "(')",
 					"endCaptures": {
 						"1": {
 							"name": "punctuation.definition.string.end.openscad"
