@@ -7,7 +7,33 @@
 	"repository": {
 		"scope": {
 			"patterns": [
+				{ "include": "#values" },
 				{ "include": "#comments" }
+			]
+		},
+		"values": {
+			"patterns": [
+				{
+					"name": "string.double.quoted.openscad",
+					"begin": "(\")",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.string.begin.openscad"
+						}
+					},
+					"end": "(\")",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.definition.string.end.openscad"
+						}
+					},
+					"patterns": [
+						{
+							"name": "constant.character.escape.openscad",
+							"match": "\\\\(x[0-7]?[0-9A-Fa-f]|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{6}|.)"
+						}
+					]
+				}
 			]
 		},
 		"comments": {
