@@ -14,6 +14,7 @@
 		},
 		"values": {
 			"patterns": [
+				{ "include": "#values-builtin" },
 				{ "include": "#values-booleans" },
 				{ "include": "#values-numbers-float" },
 				{ "include": "#values-numbers-integer" },
@@ -35,6 +36,18 @@
 				{
 					"name": "constant.language.boolean.false.openscad",
 					"match": "\\bfalse\\b"
+				}
+			]
+		},
+		"values-builtin": {
+			"patterns": [
+				{
+					"name": "constant.language.undefined.openscad",
+					"match": "\\bundef\\b"
+				},
+				{
+					"name": "constant.language.pi.openscad",
+					"match": "\\bPI\\b"
 				}
 			]
 		},
