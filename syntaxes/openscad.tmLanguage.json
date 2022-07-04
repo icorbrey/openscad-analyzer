@@ -50,7 +50,8 @@
 				{ "include": "#operators" },
 				{ "include": "#builtin" },
 				{ "include": "#values" },
-				{ "include": "#functions" }
+				{ "include": "#functions" },
+				{ "include": "#userdef" }
 			]
 		},
 		"values": {
@@ -65,6 +66,13 @@
 			"patterns": [
 				{ "include": "#functions-math" },
 				{ "include": "#functions-types" }
+			]
+		},
+		"userdef": {
+			"patterns": [
+				{ "include": "#userdef-functions" },
+				{ "include": "#userdef-modules" },
+				{ "include": "#userdef-variables" }
 			]
 		},
 		"punctuation": {
@@ -301,6 +309,87 @@
 							"name": "punctuation.bracket.close"
 						}
 					}
+				}
+			]
+		},
+		"userdef-functions": {
+			"patterns": [
+				{
+					"name": "meta.type.function.openscad",
+					"begin": "\\b(function)\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*(\\()",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.type.function.openscad"
+						},
+						"2": {
+							"name": "entity.name.function"
+						},
+						"3": {
+							"name": "punctuation.paren.open"
+						}
+					},
+					"patterns": [
+						{ "include": "#invalid-identifiers" }
+					],
+					"end": "(\\))",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.paren.close"
+						}
+					}
+				}
+			]
+		},
+		"userdef-modules": {
+			"patterns": [
+				{
+					"name": "meta.type.module.openscad",
+					"begin": "\\b(module)\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*(\\()",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.type.module.openscad"
+						},
+						"2": {
+							"name": "entity.name.module"
+						},
+						"3": {
+							"name": "punctuation.paren.open"
+						}
+					},
+					"patterns": [
+						{ "include": "#invalid-identifiers" },
+						{ "include": "#userdef-variables-parameters" }
+					],
+					"end": "(\\))",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.paren.close"
+						}
+					}
+				}
+			]
+		},
+		"userdef-variables": {
+			"patterns": [
+				{
+					"name": "variable.other.openscad",
+					"match": "[A-Za-z_][A-Za-z0-9_]*"
+				}
+			]
+		},
+		"userdef-variables-parameters": {
+			"patterns": [
+				{
+					"name": "variable.parameter.openscad",
+					"match": "[A-Za-z_][A-Za-z0-9_]*"
+				}
+			]
+		},
+		"invalid-identifiers": {
+			"patterns": [
+				{
+					"name": "invalid.identifier.openscad",
+					"match": "\\b(?i:true|false|module|function|include|use|undef|(intersection_)?for|if|else|let)\\b"
 				}
 			]
 		}
